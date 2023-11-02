@@ -1,8 +1,8 @@
 #include <stdio.h>
 /**
  * main- Enrty point.
- *
- * Return 0 Always sucsess
+ *i
+ * Return: (0) Always sucsess
  */
 int main(void)
 {
