@@ -2,13 +2,14 @@
 
 /**
  * get_history_file - gets the history file
- * @info: struct parameter
+ * @info: parameter struct
  *
- * Return: pointer to history file
+ * Return: allocated string containg history file
  */
+
 char *get_history_file(info_t *info)
 {
-	char *buf, dir;
+	char *buf, *dir;
 
 	dir = _getenv(info, "HOME=");
 	if (!dir)
@@ -22,11 +23,12 @@ char *get_history_file(info_t *info)
 	_strcat(buf, HIST_FILE);
 	return (buf);
 }
+
 /**
- * write_history - ceates a file or append a file
- * @info: struct parameter
+ * write_history - creates a file, or appends to an existing file
+ * @info: the parameter struct
  *
- * Return: 1 on Success, -1 on Fail
+ * Return: 1 on success, else -1
  */
 int write_history(info_t *info)
 {
@@ -36,7 +38,8 @@ int write_history(info_t *info)
 
 	if (!filename)
 		return (-1);
-	fd = open(filename, 0_CREATE | O_TRUNC | 0_RDWR, 0644);
+
+	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
 	if (fd == -1)
 		return (-1);
@@ -51,10 +54,10 @@ int write_history(info_t *info)
 }
 
 /**
- * read_history - read history from a file
- * @info: struct parameter
+ * read_history - reads history from file
+ * @info: the parameter struct
  *
- * Return: hiscount on success, 0 other wise
+ * Return: histcount on success, 0 otherwise
  */
 int read_history(info_t *info)
 {
@@ -65,6 +68,7 @@ int read_history(info_t *info)
 
 	if (!filename)
 		return (0);
+
 	fd = open(filename, O_RDONLY);
 	free(filename);
 	if (fd == -1)
@@ -97,11 +101,12 @@ int read_history(info_t *info)
 	renumber_history(info);
 	return (info->histcount);
 }
+
 /**
- * build_history_list - add data to history
- * @info: struct parameter
+ * build_history_list - adds entry to a history linked list
+ * @info: Structure containing potential arguments. Used to maintain
  * @buf: buffer
- * @linecount: history line count
+ * @linecount: the history linecount, histcount
  *
  * Return: Always 0
  */
@@ -119,12 +124,11 @@ int build_history_list(info_t *info, char *buf, int linecount)
 }
 
 /**
- * renumber_history - renumber history list
- * @info: struct parameter
+ * renumber_history - renumbers the history linked list after changes
+ * @info: Structure containing potential arguments. Used to maintain
  *
- * Return: the new hiscount
+ * Return: the new histcount
  */
-
 int renumber_history(info_t *info)
 {
 	list_t *node = info->history;
