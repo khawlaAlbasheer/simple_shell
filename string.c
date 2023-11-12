@@ -20,7 +20,7 @@ int _strlen(char *s)
 
 /**
  * _strcmp - performs lexicographic comparison of two strings.
- * @s1: the first strang
+ * @s1: the first string
  * @s2: the second strang
  *
  * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
